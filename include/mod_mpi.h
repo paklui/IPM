@@ -27,9 +27,7 @@ extern MPI_Group ipm_world_group;
 
 #define IPM_MPI_MAP_RANK(rank_out_, rank_in_, comm_) \
   do { \
-    int comm_cmp_; \
-    PMPI_Comm_compare(MPI_COMM_WORLD, comm_, &comm_cmp_); \
-    if (comm_cmp_ == MPI_IDENT || rank_in_ == MPI_ANY_SOURCE) { \
+    if (comm_ == MPI_COMM_WORLD || rank_in_ == MPI_ANY_SOURCE) { \
       rank_out_=rank_in_; \
     } else { \
       MPI_Group group_; \
